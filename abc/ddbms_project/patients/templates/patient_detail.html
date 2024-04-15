@@ -1,0 +1,38 @@
+<!-- templates/patients/patient_detail.html -->
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Patient Details</h1>
+    <table>
+        <tr>
+            <th>Attribute</th>
+            <th>Value</th>
+        </tr>
+        <tr>
+            <td>First Name:</td>
+            <td>{{ patient.first_name }}</td>
+        </tr>
+        <tr>
+            <td>Last Name:</td>
+            <td>{{ patient.last_name }}</td>
+        </tr>
+        <tr>
+            <td>Date of Birth:</td>
+            <td>{{ patient.date_of_birth }}</td>
+        </tr>
+        <tr>
+            <td>Gender:</td>
+            <td>{{ patient.gender }}</td>
+        </tr>
+        <tr>
+            <td>Phone:</td>
+            <td>{{ patient.phone }}</td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td>{{ patient.email }}</td>
+        </tr>
+    </table>
+    <br>
+    <a href="{% url 'patient_update' patient.pk %}">Edit</a>
+    <a href="{% url 'patient_delete' patient.pk %}">Delete</a>
+{% endblock %}

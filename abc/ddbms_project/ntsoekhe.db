@@ -1,0 +1,68 @@
+import sqlite3
+
+# Connect to SQLite database
+conn = sqlite3.connect('ntsoekhe.db')
+
+# Create a cursor object
+c = conn.cursor()
+
+# Create Patients table
+c.execute('''
+    CREATE TABLE Patients (
+        PatientID INTEGER PRIMARY KEY,
+        FirstName TEXT,
+        LastName TEXT,
+        DateOfBirth TEXT,
+        Gender TEXT,
+        Phone TEXT,
+        Email TEXT
+    )
+''')
+
+# Create MedicalRecord table
+c.execute('''
+    CREATE TABLE MedicalRecord (
+        RecordID INTEGER PRIMARY KEY,
+        PatientID INTEGER,
+        DateOfVisit TEXT,
+        Diagnosis TEXT,
+        Treatment TEXT,
+        FOREIGN KEY(PatientID) REFERENCES Patients(PatientID)
+    )
+''')
+
+# Create LabResult table
+c.execute('''
+    CREATE TABLE LabResult (
+        ResultID INTEGER PRIMARY KEY,
+        RecordID INTEGER,
+        TestName TEXT,
+        TestDate TEXT,
+        TestResult TEXT,
+        FOREIGN KEY(RecordID) REFERENCES MedicalRecord(RecordID)
+    )
+''')
+
+# Create UserRoles table
+c.execute('''
+    CREATE TABLE UserRoles (
+        RoleID INTEGER PRIMARY KEY,
+        RoleName TEXT
+    )
+''')
+
+# Create AccessControls table
+c.execute('''
+    CREATE TABLE AccessControls (
+        UserID INTEGER PRIMARY KEY,
+        UserName TEXT,
+        RoleID INTEGER,
+        FOREIGN KEY(RoleID) REFERENCES UserRoles(RoleID)
+    )
+''')
+
+# Commit the transaction
+conn.commit()
+
+# Close the connection
+conn.close()

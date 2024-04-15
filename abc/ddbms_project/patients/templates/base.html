@@ -1,0 +1,20 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ntsoekhe DDBMS</title>
+</head>
+<body>
+    <header>
+        <h1>Ntsoekhe DDBMS</h1>
+        <nav>
+            <a href="{% url 'patient_list' %}">Patients</a>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>
